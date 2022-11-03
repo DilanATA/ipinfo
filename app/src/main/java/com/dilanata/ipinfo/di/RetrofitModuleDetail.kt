@@ -1,10 +1,11 @@
 package com.dilanata.ipinfo.di
 
-import com.dilanata.ipinfo.api.FindIPApi
-import com.dilanata.ipinfo.util.Constants.BASE_URL
+import com.dilanata.ipinfo.api.IpDetailApi
+import com.dilanata.ipinfo.util.Constants.BASE_URL_DETAIL
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
 import dagger.Module
 import dagger.Provides
+import dagger.Reusable
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import kotlinx.serialization.ExperimentalSerializationApi
@@ -15,11 +16,11 @@ import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
-
+/*
 @ExperimentalSerializationApi
 @Module
 @InstallIn(SingletonComponent::class)
-open class RetrofitModule {
+open class RetrofitModuleDetail {
 
     val contentType = "application/json".toMediaType()
 
@@ -32,16 +33,15 @@ open class RetrofitModule {
                 ignoreUnknownKeys = true
                 isLenient = true
             }.asConverterFactory(contentType))
-            .baseUrl(BASE_URL)
+            .baseUrl(BASE_URL_DETAIL)
             .build()
     }
 
     @Provides
     @Singleton
-    fun provideJsonApi(retrofit: Retrofit): FindIPApi {
-        return retrofit.create(FindIPApi::class.java)
+    fun provideJsonApiDetail(retrofit: Retrofit): IpDetailApi {
+        return retrofit.create(IpDetailApi::class.java)
     }
-
 
     @Provides
     @Singleton
@@ -55,7 +55,7 @@ open class RetrofitModule {
 
     @Provides
     @Singleton
-    fun setupOkHttpBuilder (): OkHttpClient.Builder {
+    fun setupOkHttpBuilder(): OkHttpClient.Builder {
         return OkHttpClient.Builder()
             .addInterceptor(
                 HttpLoggingInterceptor()
@@ -63,7 +63,6 @@ open class RetrofitModule {
                         it.level = setLogLevel()
                     }
             )
-           // .addInterceptor(DomainInterceptor())
             .followRedirects(true)
             .followSslRedirects(true)
             .readTimeout(40, TimeUnit.SECONDS)
@@ -71,3 +70,4 @@ open class RetrofitModule {
             .writeTimeout(40, TimeUnit.SECONDS)
     }
 }
+*/

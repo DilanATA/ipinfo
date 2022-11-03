@@ -1,17 +1,15 @@
-package com.dilanata.ipinfo.ui.findIp
+package com.dilanata.ipinfo.ui.ipDetail
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.navigation.navGraphViewModels
 import com.dilanata.ipinfo.R
-import com.dilanata.ipinfo.api.model.IP
+import com.dilanata.ipinfo.api.IpDetailApi
+import com.dilanata.ipinfo.api.model.ipDetail.IpDetail
 import com.dilanata.ipinfo.base.BaseFragment
 import com.dilanata.ipinfo.data.Status
-import com.dilanata.ipinfo.databinding.FragmentFindIpBinding
-import com.dilanata.ipinfo.extension.navigateSafe
+import com.dilanata.ipinfo.databinding.FragmentIpDetailBinding
+import com.dilanata.ipinfo.ui.findIp.FindIpVM
 import com.github.ajalt.timberkt.i
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -21,35 +19,27 @@ import kotlinx.coroutines.FlowPreview
 @ExperimentalCoroutinesApi
 @FlowPreview
 @AndroidEntryPoint
-class FindIpFragment : BaseFragment<FragmentFindIpBinding>(R.layout.fragment_find_ip) {
+class IpDetailFragment : BaseFragment<FragmentIpDetailBinding>(R.layout.fragment_ip_detail) {
 
-    lateinit var ip: IP
+    lateinit var ipDetail: IpDetail
 
     private val findIpVM: FindIpVM by navGraphViewModels(R.id.nav_graph) {
         defaultViewModelProviderFactory
     }
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        findIpVM.getIp()
 
-        findIpVM.ip.observe(viewLifecycleOwner) {
+        findIpVM.getIpDetail("88.231.200.64")
+        findIpVM.ipDetail.observe(viewLifecycleOwner) {
             when (it.status) {
                 Status.SUCCESS -> {
-                    ip = it.data!!
-                    binding.ip = ip
+                    ipDetail = it.data!!
                 }
                 Status.ERROR -> i { "error ${it.throwable}" }
                 Status.LOADING -> i { "Loading" }
             }
-        }
 
-        binding.detailBtn.setOnClickListener {
-            navigateSafe(R.id.action_findIpFragment_to_ipDetailFragment)
         }
     }
-
 }

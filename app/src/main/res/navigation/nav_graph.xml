@@ -9,5 +9,14 @@
         android:id="@+id/findIpFragment"
         android:name="com.dilanata.ipinfo.ui.findIp.FindIpFragment"
         android:label="fragment_find_ip"
-        tools:layout="@layout/fragment_find_ip" />
+        tools:layout="@layout/fragment_find_ip" >
+        <action
+            android:id="@+id/action_findIpFragment_to_ipDetailFragment"
+            app:destination="@id/ipDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/ipDetailFragment"
+        android:name="com.dilanata.ipinfo.ui.ipDetail.IpDetailFragment"
+        android:label="fragment_ip_detail"
+        tools:layout="@layout/fragment_ip_detail" />
 </navigation>

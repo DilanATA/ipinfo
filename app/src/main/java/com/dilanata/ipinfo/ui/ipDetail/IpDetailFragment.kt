@@ -35,6 +35,7 @@ class IpDetailFragment : BaseFragment<FragmentIpDetailBinding>(R.layout.fragment
             when (it.status) {
                 Status.SUCCESS -> {
                     ipDetail = it.data!!
+                    binding.ipDetail = ipDetail
                 }
                 Status.ERROR -> i { "error ${it.throwable}" }
                 Status.LOADING -> i { "Loading" }

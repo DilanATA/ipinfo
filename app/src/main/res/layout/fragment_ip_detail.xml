@@ -2,15 +2,36 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".ui.ipDetail.IpDetailFragment">
-    <FrameLayout
+    <data>
+        <variable
+            name="ipDetail"
+            type="com.dilanata.ipinfo.api.model.ipDetail.IpDetail" />
+    </data>
+    <LinearLayout
+        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <TextView
-            android:id="@+id/tv_region"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="@string/hello_blank_fragment" />
+            android:id="@+id/tv_city"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{ipDetail.geoplugin_city}" />
+        <TextView
+            android:id="@+id/tv_regionCode"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{ipDetail.geoplugin_regionCode}" />
+        <TextView
+            android:id="@+id/tv_countryCode"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{ipDetail.geoplugin_countryCode}" />
+        <TextView
+            android:id="@+id/tv_country"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{ipDetail.geoplugin_countryName}" />
 
-    </FrameLayout>
+    </LinearLayout>
 </layout>
